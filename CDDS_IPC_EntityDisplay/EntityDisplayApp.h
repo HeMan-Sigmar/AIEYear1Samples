@@ -25,7 +25,12 @@ public:
 protected:
 	int m_screenWidth;
 	int m_screenHeight;
+	// IN APPLICATION 2 – A user of the named shared memory 
+// gain access to a named shared memory block that already exists 
 
 	// an array of an unknown number of entities
 	std::vector<Entity> m_entities;
+
+	HANDLE fileHandle;
+	HANDLE sizeHandle;
 };

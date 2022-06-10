@@ -31,13 +31,28 @@ bool EntityEditorApp::Startup() {
 		entity.g = rand() % 255;
 		entity.b = rand() % 255;
 	}
-	
+	fileHandle = CreateFileMapping(
+		INVALID_HANDLE_VALUE, // a handle to an existing virtual file, or invalid 
+		nullptr, // optional security attributes 
+		PAGE_READWRITE, // read/write access control 
+		0, sizeof(Entity), // size of the memory block,  
+		L"MySharedMemory");
+
+	sizeHandle = CreateFileMapping(
+		INVALID_HANDLE_VALUE, // a handle to an existing virtual file, or invalid 
+		nullptr, // optional security attributes 
+		PAGE_READWRITE, // read/write access control 
+		0, sizeof(int), // size of the memory block,  
+		L"sizeMemory");
 	return true;
 }
 
 void EntityEditorApp::Shutdown() {
 
 	CloseWindow();        // Close window and OpenGL context
+	// close the shared file 
+	CloseHandle(fileHandle);
+	CloseHandle(sizeHandle);
 }
 
 void EntityEditorApp::Update(float deltaTime) {
@@ -54,7 +69,7 @@ void EntityEditorApp::Update(float deltaTime) {
 	static Color colorPickerValue = WHITE;
 
 
-	if (GuiSpinner(Rectangle{ 90, 25, 125, 25 }, "Entity", &selection, 0, ENTITY_COUNT-1, selectionEditMode)) selectionEditMode = !selectionEditMode;
+	if (GuiSpinner(Rectangle{ 90, 25, 125, 25 }, "Entity", &selection, 0, ENTITY_COUNT-2, selectionEditMode)) selectionEditMode = !selectionEditMode;
 	
 	int intX = (int)m_entities[selection].x;	
 	int intY = (int)m_entities[selection].y;
@@ -100,9 +115,22 @@ void EntityEditorApp::Update(float deltaTime) {
 		m_entities[i].y = fmod(m_entities[i].y, m_screenHeight);
 		if (m_entities[i].y < 0)
 			m_entities[i].y += m_screenHeight;
-	}
-}
 
+	}
+	Entity* entity = (Entity*)MapViewOfFile(fileHandle, FILE_MAP_ALL_ACCESS,
+		0, 0, sizeof(Entity*));
+
+	int* count = (int*)MapViewOfFile(sizeHandle, FILE_MAP_ALL_ACCESS,
+		0, 0, sizeof(int));
+	
+	for (int i = 0; i < ENTITY_COUNT; i++) {
+		entity[i] = m_entities[i];
+	}
+	*count = ENTITY_COUNT;
+	UnmapViewOfFile(entity);
+	UnmapViewOfFile(count);
+
+}
 void EntityEditorApp::Draw() {
 	BeginDrawing();
 
@@ -116,7 +144,7 @@ void EntityEditorApp::Draw() {
 			entity.rotation,
 			Color{ entity.r, entity.g, entity.b, 255 });
 	}
-
+	
 	// output some text, uses the last used colour
 	DrawText("Press ESC to quit", 630, 15, 12, LIGHTGRAY);
 
