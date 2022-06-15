@@ -94,7 +94,7 @@ void BinaryTree::Draw(TreeNode* pNode, int x, int y, int horizontalSpacing, Tree
 		if (pNode->HasLeft())
 		{
 			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
-			
+
 			Draw(pNode->GetLeft(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
 		}
 
@@ -107,4 +107,12 @@ void BinaryTree::Draw(TreeNode* pNode, int x, int y, int horizontalSpacing, Tree
 
 		pNode->Draw(x, y, (selected == pNode));
 	}
+}
+void BinaryTree::Insert(int value)
+{
+	if (m_pRoot = nullptr)
+	{
+		value = m_pRoot;
+	}
+	pCurrent
 }
