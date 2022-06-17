@@ -56,19 +56,44 @@ void BinaryTree::Insert(int a_nValue)
 			}
 			else if (a_nValue = currentNode->GetData())
 			{
-
+				std::cout << "The value is already in the tree" << endl;
 			}
 		}
 	}
-	
+
 }
 
-TreeNode* BinaryTree::Find(int a_nValue)
+TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 {
 	TreeNode* pCurrent = nullptr;
 	TreeNode* pParent = nullptr;
 
 	return FindNode(a_nValue, pCurrent, pParent) ? pCurrent: nullptr;
+
+	//if (a_nValue == iter->GetData())
+	//{
+	//	return iter;
+	//}
+	//else 
+	//{
+	//	if (a_nValue < iter->GetData()) 
+	//	{
+	//		if (iter->HasLeft())
+	//		{
+	//			return Find(a_nValue, iter->HasLeft());
+	//		}
+
+	//	}
+
+	//	else if (a_nValue > iter->GetData())
+	//	{
+	//		if (iter->HasRight())
+	//		{
+	//			return Find(a_nValue, iter->HasRight());
+	//		}
+	//	}
+	//}
+	//return nullptr;
 }
 
 bool BinaryTree::FindNode(int a_nSearchValue, TreeNode*& ppOutNode, TreeNode*& ppOutParent)
