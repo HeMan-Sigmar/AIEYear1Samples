@@ -57,10 +57,35 @@ void BinaryTree::Insert(int a_nValue)
 			else if (a_nValue = currentNode->GetData())
 			{
 				std::cout << "The value is already in the tree" << endl;
+				exit;
+
 			}
 		}
+		currentNode = parentNode;
+		parentNode = nullptr;
+		if (a_nValue < parentNode->GetData())
+		{
+			a_nValue = parentNode->GetLeft();
+		}
+		else
+		{
+			a_nValue = parentNode->GetRight();
+		}
 	}
-
+	/*If the tree is empty, the value is inserted at the root
+	Set the current node to the root
+	While the current node is not null
+	If the value to be inserted is less than the value in the current node
+	Set the current node to the left childand continue
+	If the value to be inserted is greater than the current node
+	Set the current node to the right childand continue
+	If the value to be inserted is the same as the value in the current node
+	The value is already in the tree, so exit
+	end While
+	Get the parent of the current node(before it was set to null)
+	If value to be inserted is less than parent
+	insert value as left child node
+	otherwise insert value as right child node*/
 }
 
 TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
@@ -69,6 +94,9 @@ TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 	TreeNode* pParent = nullptr;
 
 	return FindNode(a_nValue, pCurrent, pParent) ? pCurrent: nullptr;
+
+
+
 
 	//if (a_nValue == iter->GetData())
 	//{
@@ -94,11 +122,25 @@ TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 	//	}
 	//}
 	//return nullptr;
+
+
+
+
+
 }
 
 bool BinaryTree::FindNode(int a_nSearchValue, TreeNode*& ppOutNode, TreeNode*& ppOutParent)
 {
-
+	//Set the current node to the root
+	//	While the current node is not null
+	//	if the search value equals the current node value,
+	//		return the current node and its parent
+	//		otherwise
+	//		If the search value is less than the current node
+	//		set the current node to the left child
+	//		otherwise set the current node to the right child
+	//		end While
+	//		If the loop exits, then a match was not found, so return false
 
 	return false;
 }
