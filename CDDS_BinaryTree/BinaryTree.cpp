@@ -41,7 +41,7 @@ void BinaryTree::Insert(int a_nValue)
 	if (IsEmpty())
 	{
 		*m_pRoot = a_nValue;
-		while (m_pRoot != nullptr)
+		while (m_pRoot = NULL)
 		{
 			if (a_nValue > currentNode -> GetData())
 			{
@@ -54,22 +54,22 @@ void BinaryTree::Insert(int a_nValue)
 				parentNode = currentNode;
 				currentNode = currentNode->GetRight();
 			}
-			else if (a_nValue = currentNode->GetData())
+			else if (a_nValue == currentNode->GetData())
 			{
-				std::cout << "The value is already in the tree" << endl;
-				exit;
-
+				std::cout << "The value is already in the tree";
+				return;
 			}
+			
 		}
 		currentNode = parentNode;
 		parentNode = nullptr;
 		if (a_nValue < parentNode->GetData())
 		{
-			a_nValue = parentNode->GetLeft();
+			parentNode->GetLeft();
 		}
 		else
 		{
-			a_nValue = parentNode->GetRight();
+			parentNode->GetRight();
 		}
 	}
 	/*If the tree is empty, the value is inserted at the root
@@ -94,53 +94,30 @@ TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 	TreeNode* pParent = nullptr;
 
 	return FindNode(a_nValue, pCurrent, pParent) ? pCurrent: nullptr;
-
-
-
-
-	//if (a_nValue == iter->GetData())
-	//{
-	//	return iter;
-	//}
-	//else 
-	//{
-	//	if (a_nValue < iter->GetData()) 
-	//	{
-	//		if (iter->HasLeft())
-	//		{
-	//			return Find(a_nValue, iter->HasLeft());
-	//		}
-
-	//	}
-
-	//	else if (a_nValue > iter->GetData())
-	//	{
-	//		if (iter->HasRight())
-	//		{
-	//			return Find(a_nValue, iter->HasRight());
-	//		}
-	//	}
-	//}
-	//return nullptr;
-
-
-
-
-
 }
 
 bool BinaryTree::FindNode(int a_nSearchValue, TreeNode*& ppOutNode, TreeNode*& ppOutParent)
 {
-	//Set the current node to the root
-	//	While the current node is not null
-	//	if the search value equals the current node value,
-	//		return the current node and its parent
-	//		otherwise
-	//		If the search value is less than the current node
-	//		set the current node to the left child
-	//		otherwise set the current node to the right child
-	//		end While
-	//		If the loop exits, then a match was not found, so return false
+	TreeNode* pCurrent = nullptr;
+	TreeNode* pParent = nullptr;
+	pCurrent= m_pRoot;
+	while (pCurrent != NULL)
+	{
+		if (a_nSearchValue == pCurrent->SetData()) 
+		{
+
+		}
+	}
+	/*Set the current node to the root
+		While the current node is not null
+		if the search value equals the current node value,
+			return the current node and its parent
+			otherwise
+			If the search value is less than the current node
+			set the current node to the left child
+			otherwise set the current node to the right child
+			end While
+			If the loop exits, then a match was not found, so return false*/
 
 	return false;
 }
