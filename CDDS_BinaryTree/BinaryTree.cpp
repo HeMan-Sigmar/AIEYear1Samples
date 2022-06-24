@@ -35,43 +35,42 @@ bool BinaryTree::IsEmpty() const
 void BinaryTree::Insert(int a_nValue)
 {
 	TreeNode* parentNode = nullptr;
-	TreeNode* currentNode = nullptr;
-	currentNode = m_pRoot;
+	TreeNode* newNode = new TreeNode (a_nValue);
 
-	if (IsEmpty())
+	if (m_pRoot == nullptr)
 	{
-		*m_pRoot = a_nValue;
-		while (m_pRoot = NULL)
+		m_pRoot = newNode;
+		return;
+	}
+	TreeNode* currentNode = m_pRoot;
+	while (currentNode != nullptr)
 		{
 			if (a_nValue > currentNode -> GetData())
 			{
 				parentNode = currentNode;
 				currentNode = currentNode->GetLeft();
-
+				
 			}
 			else if (a_nValue < currentNode -> GetData())
 			{
 				parentNode = currentNode;
 				currentNode = currentNode->GetRight();
+
 			}
 			else if (a_nValue == currentNode->GetData())
 			{
-				std::cout << "The value is already in the tree";
 				return;
 			}
-			
 		}
-		currentNode = parentNode;
-		parentNode = nullptr;
 		if (a_nValue < parentNode->GetData())
 		{
-			parentNode->GetLeft();
+			parentNode->SetLeft(newNode);
 		}
 		else
 		{
-			parentNode->GetRight();
+			parentNode->SetRight(newNode);
 		}
-	}
+	
 	/*If the tree is empty, the value is inserted at the root
 	Set the current node to the root
 	While the current node is not null
@@ -93,21 +92,38 @@ TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 	TreeNode* pCurrent = nullptr;
 	TreeNode* pParent = nullptr;
 
+	while (pCurrent != NULL)
+	{
+		if (a_nValue = pCurrent->GetData())
+		{
+			pCurrent && pParent;
+		}
+		else
+		{
+			if (a_nValue < pCurrent->GetData())
+			{
+				pCurrent->GetLeft();
+
+			}
+			else
+			{
+				pCurrent->GetRight();
+
+			}
+		}
+	}
 	return FindNode(a_nValue, pCurrent, pParent) ? pCurrent: nullptr;
 }
 
 bool BinaryTree::FindNode(int a_nSearchValue, TreeNode*& ppOutNode, TreeNode*& ppOutParent)
 {
-	TreeNode* pCurrent = nullptr;
-	TreeNode* pParent = nullptr;
-	pCurrent= m_pRoot;
-	while (pCurrent != NULL)
-	{
-		if (a_nSearchValue == pCurrent->SetData()) 
-		{
 
-		}
-	}
+
+	//if ()
+	//{
+	//	std::cout << "Match was not found";
+	//	return false;
+	//}
 	/*Set the current node to the root
 		While the current node is not null
 		if the search value equals the current node value,
