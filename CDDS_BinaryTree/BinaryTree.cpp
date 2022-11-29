@@ -117,24 +117,26 @@ TreeNode* BinaryTree::Find(int a_nValue, TreeNode* iter)
 
 bool BinaryTree::FindNode(int a_nSearchValue, TreeNode*& ppOutNode, TreeNode*& ppOutParent)
 {
-
-
-	//if ()
-	//{
-	//	std::cout << "Match was not found";
-	//	return false;
-	//}
-	/*Set the current node to the root
-		While the current node is not null
-		if the search value equals the current node value,
-			return the current node and its parent
-			otherwise
-			If the search value is less than the current node
-			set the current node to the left child
-			otherwise set the current node to the right child
-			end While
-			If the loop exits, then a match was not found, so return false*/
-
+	TreeNode* curNode = m_pRoot;
+	TreeNode* parentNode = nullptr;
+	while (curNode != NULL)
+	{
+		if (a_nSearchValue == curNode->GetData())
+		{
+			return curNode && parentNode;
+		}
+		else
+		{
+			if (a_nSearchValue < curNode->GetData())
+			{
+				curNode->GetLeft();
+			}
+			else
+			{
+				curNode->GetRight();
+			}
+		}
+	}
 	return false;
 }
 
